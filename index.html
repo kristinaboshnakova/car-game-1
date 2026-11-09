@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#101328">
+    <meta name="description" content="City Quest — градска аркадна игра с 50 нива, автомобили и персонализирани герои.">
+    <title>City Quest — Urban Rush</title>
+    <!-- Font Awesome: векторни икони за всички навигационни панели. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <button class="logo" type="button" data-screen="home" aria-label="Начало"><span class="logo-mark"><i class="fa-solid fa-route" aria-hidden="true" data-fallback="↗"></i></span><span>CITY <b>QUEST</b></span></button>
+            <div class="topbar-right"><span class="topbar-level" id="headerProgress">НИВО 01 / 50</span><button class="sound-button" id="soundButton" aria-label="Изключване на звука"><i class="fa-solid fa-volume-high" aria-hidden="true" data-fallback="♪"></i></button></div>
+        </header>
+        <main id="appMain">
+            <!-- НАЧАЛО: само игрови навигационни елементи, без технически описания. -->
+            <section class="screen home-screen" id="homeScreen">
+                <div class="hero-banner">
+                    <div class="banner-sun"></div><div class="banner-city" aria-hidden="true"></div>
+                    <div class="banner-content"><span class="tag">URBAN RUSH</span><h1>ТВОЯТ ГРАД.<br><em>ТВОИТЕ ПРАВИЛА.</em></h1><p>Готов ли си за следващия маршрут?</p><button class="primary-button hero-cta" id="quickPlayButton">ИГРАЙ СЕГА <span><i class="fa-solid fa-arrow-right" aria-hidden="true" data-fallback="➜"></i></span></button></div>
+                    <div class="banner-car" aria-hidden="true"><span class="banner-car-body"><i class="fa-solid fa-car-side" aria-hidden="true" data-fallback="▰"></i></span><span class="banner-car-trail"></span></div>
+                </div>
+                <div class="dashboard-heading"><h2>ТВОЯТ СВЯТ</h2><span id="homeProgress">1 / 50</span></div>
+                <div class="home-cards">
+                    <button class="nav-card avatar-nav" type="button" data-screen="avatar"><span class="nav-art"><i class="fa-solid fa-user-astronaut" aria-hidden="true" data-fallback="♙"></i></span><span><strong>МОЯТ ГЕРОЙ</strong><small>Създай своя стил</small></span><span class="nav-arrow"><i class="fa-solid fa-arrow-up-right" aria-hidden="true" data-fallback="↗"></i></span></button>
+                    <button class="nav-card garage-nav" type="button" data-screen="garage"><span class="nav-art"><i class="fa-solid fa-car-side" aria-hidden="true" data-fallback="▰"></i></span><span><strong>ГАРАЖ</strong><small>Избери автомобил</small></span><span class="nav-arrow"><i class="fa-solid fa-arrow-up-right" aria-hidden="true" data-fallback="↗"></i></span></button>
+                    <button class="nav-card levels-nav" type="button" data-screen="levels"><span class="nav-art"><i class="fa-solid fa-flag-checkered" aria-hidden="true" data-fallback="⚑"></i></span><span><strong>КАРТА НА НИВАТА</strong><small>50 предизвикателства</small></span><span class="nav-arrow"><i class="fa-solid fa-arrow-up-right" aria-hidden="true" data-fallback="↗"></i></span></button>
+                    <button class="nav-card info-nav" type="button" data-screen="info"><span class="nav-art"><i class="fa-solid fa-circle-info" aria-hidden="true" data-fallback="i"></i></span><span><strong>ЗА ИГРАТА</strong><small>Правила и управление</small></span><span class="nav-arrow"><i class="fa-solid fa-arrow-up-right" aria-hidden="true" data-fallback="↗"></i></span></button>
+                </div>
+            </section>
+            <!-- АВАТАР: персонализиране на лице, кожа, прическа и облекло. -->
+            <section class="screen hidden" id="avatarScreen">
+                <div class="screen-heading"><button class="back-button" type="button" data-screen="home"><i class="fa-solid fa-arrow-left" aria-hidden="true" data-fallback="←"></i></button><div><span class="eyebrow">CHARACTER STUDIO</span><h1>МОЯТ ГЕРОЙ</h1></div></div>
+                <div class="studio-layout"><div class="preview-panel"><div class="preview-light"></div><div class="avatar-preview" id="avatarPreview" aria-label="Преглед на героя"></div><div class="preview-caption" id="heroNamePreview">НОВА</div></div>
+                    <div class="editor-panel"><label for="heroNameInput" class="field-label">Име на героя</label><input id="heroNameInput" type="text" maxlength="16" placeholder="Моят герой" autocomplete="off">
+                        <div class="editor-group"><h2>Основа</h2><div class="choice-row" id="baseChoices"></div></div>
+                        <div class="editor-group"><h2>Цвят на кожата</h2><div class="choice-row" id="skinChoices"></div></div>
+                        <div class="editor-group"><h2>Прическа</h2><div class="choice-row choice-wrap" id="hairChoices"></div></div>
+                        <div class="editor-group"><h2>Цвят на косата</h2><div class="choice-row" id="hairColorChoices"></div></div>
+                        <div class="editor-group"><h2>Облекло</h2><div class="choice-row choice-wrap" id="outfitChoices"></div></div>
+                        <div class="editor-group"><h2>Цвят на дрехите</h2><div class="choice-row" id="outfitColorChoices"></div></div>
+                        <button type="button" class="primary-button full-button" data-screen="home">ГОТОВО <span><i class="fa-solid fa-check" aria-hidden="true" data-fallback="✓"></i></span></button>
+                    </div>
+                </div>
+            </section>
+            <!-- ГАРАЖ: избор на модел и боя. -->
+            <section class="screen hidden" id="garageScreen">
+                <div class="screen-heading"><button class="back-button" type="button" data-screen="home"><i class="fa-solid fa-arrow-left" aria-hidden="true" data-fallback="←"></i></button><div><span class="eyebrow">PERSONAL GARAGE</span><h1>МОЯТ ГАРАЖ</h1></div></div>
+                <div class="garage-layout"><div class="garage-preview"><div class="garage-glow"></div><canvas id="carPreviewCanvas" width="440" height="290" aria-label="Преглед на автомобил"></canvas><h2 id="carPreviewTitle">STREET</h2><span id="carPreviewSubtitle">Балансиран автомобил</span></div>
+                    <div class="garage-options"><h2>Избери автомобил</h2><div class="car-choice-grid" id="carChoices"></div><h2>Цвят на автомобила</h2><div class="choice-row" id="carColorChoices"></div><button type="button" class="primary-button full-button" data-screen="home">КЪМ НАЧАЛОТО <span><i class="fa-solid fa-check" aria-hidden="true" data-fallback="✓"></i></span></button></div>
+                </div>
+            </section>
+            <!-- НИВА: заключени и отключени маршрути. -->
+            <section class="screen hidden" id="levelsScreen">
+                <div class="screen-heading"><button class="back-button" type="button" data-screen="home"><i class="fa-solid fa-arrow-left" aria-hidden="true" data-fallback="←"></i></button><div><span class="eyebrow">CITY MAP</span><h1>НИВА</h1></div></div>
+                <div class="levels-content"><div class="level-feature"><span class="tag" id="levelFeatureNumber">НИВО 01</span><h2 id="levelDescription">Първи километри</h2><span id="bestScoreLabel">Рекорд: 0</span><button class="primary-button" type="button" id="startButton">СТАРТ <span><i class="fa-solid fa-arrow-right" aria-hidden="true" data-fallback="➜"></i></span></button></div><div class="level-grid" id="levelGrid"></div><div class="level-footer" id="progressLabel">1 от 50 отключени</div></div>
+            </section>
+            <!-- ИНФОРМАЦИЯ: тук са правилата, без да пречат на основния интерфейс. -->
+            <section class="screen hidden" id="infoScreen">
+                <div class="screen-heading"><button class="back-button" type="button" data-screen="home"><i class="fa-solid fa-arrow-left" aria-hidden="true" data-fallback="←"></i></button><div><span class="eyebrow">HOW TO PLAY</span><h1>ЗА ИГРАТА</h1></div></div>
+                <div class="info-layout"><article class="info-card"><span class="info-symbol"><i class="fa-solid fa-city" aria-hidden="true" data-fallback="▥"></i></span><h2>Градът те очаква</h2><p>Шофирай по оживени улици, събирай звезди и завършвай маршрути. Отключи всички 50 нива и се изправи срещу все по-сложни участъци.</p></article>
+                    <article class="info-card"><span class="info-symbol"><i class="fa-solid fa-road-barrier" aria-hidden="true" data-fallback="⚠"></i></span><h2>Опасности</h2><p>Избягвай автомобилите, бариерите и ниско летящите птици. Прескачай пропастите с точен скок. Щитът блокира един удар, а аптечката връща живот.</p></article>
+                    <article class="info-card"><span class="info-symbol"><i class="fa-solid fa-keyboard" aria-hidden="true" data-fallback="⌨"></i></span><h2>Управление</h2><p>Стрелки или W A S D за движение. Интервал (Space) за скок. P или Esc за пауза. На телефон използвай бутоните за управление.</p></article>
+                    <article class="info-card"><span class="info-symbol"><i class="fa-solid fa-trophy" aria-hidden="true" data-fallback="★"></i></span><h2>Победа</h2><p>Събери нужния брой звезди и измини целия маршрут. Завършените нива, рекордите, визията на героя и избраната кола се запазват автоматично.</p></article>
+                </div>
+            </section>
+            <!-- ИГРА: минимален HUD и управление. -->
+            <section class="screen game-screen hidden" id="gameScreen">
+                <div class="game-topline"><button class="back-button" id="exitButton" type="button" aria-label="Към нивата"><i class="fa-solid fa-arrow-left" aria-hidden="true" data-fallback="←"></i></button><div class="game-level-title" id="gameLevelTitle">НИВО 01 / 50</div><button class="pause-button" id="pauseButton" type="button"><i class="fa-solid fa-pause" aria-hidden="true" data-fallback="Ⅱ"></i></button></div>
+                <div class="game-layout"><div class="game-frame"><div class="driver-badge" id="driverBadge" aria-label="Твоят герой"></div><canvas id="gameCanvas" width="480" height="720" aria-label="Игра с автомобили, препятствия и звезди"></canvas><div class="game-overlay hidden" id="gameOverlay" aria-live="polite"><div class="overlay-card"><div class="overlay-symbol" id="overlaySymbol"><i class="fa-solid fa-flag-checkered" aria-hidden="true" data-fallback="⚑"></i></div><h2 id="overlayTitle">Браво!</h2><p id="overlayText">Нивото е завършено.</p><div class="overlay-actions" id="overlayActions"></div></div></div></div>
+                    <aside class="game-sidebar"><div class="hud-tile"><span><i class="fa-solid fa-star" aria-hidden="true" data-fallback="★"></i> ЗВЕЗДИ</span><strong id="starCounter">0 / 5</strong><div class="progress-track"><div class="progress-fill" id="starBar"></div></div></div><div class="hud-tile"><span>МАРШРУТ</span><strong id="distanceCounter">0%</strong><div class="progress-track"><div class="progress-fill secondary-fill" id="distanceBar"></div></div></div><div class="hud-stats"><div><span><i class="fa-solid fa-heart" aria-hidden="true" data-fallback="♥"></i></span><b id="healthCounter">♥ ♥ ♥</b></div><div><span><i class="fa-solid fa-trophy" aria-hidden="true" data-fallback="★"></i></span><b id="scoreCounter">0</b></div><div><span><i class="fa-solid fa-shield-halved" aria-hidden="true" data-fallback="◆"></i></span><b id="shieldCounter">—</b></div></div><div class="hud-identity"><div id="hudAvatar"></div><span id="hudDriverName">НОВА</span></div></aside></div>
+                <div class="touch-controls" id="touchControls"><button class="control-button" data-control="left" type="button" aria-label="Наляво"><i class="fa-solid fa-chevron-left" aria-hidden="true" data-fallback="‹"></i></button><div class="vertical-controls"><button class="control-button control-small" data-control="up" type="button" aria-label="Напред"><i class="fa-solid fa-chevron-up" aria-hidden="true" data-fallback="⌃"></i></button><button class="control-button control-small" data-control="down" type="button" aria-label="Назад"><i class="fa-solid fa-chevron-down" aria-hidden="true" data-fallback="⌄"></i></button></div><button class="control-button" data-control="right" type="button" aria-label="Надясно"><i class="fa-solid fa-chevron-right" aria-hidden="true" data-fallback="›"></i></button><button class="control-button jump-button" data-control="jump" type="button" aria-label="Скок"><i class="fa-solid fa-person-running" aria-hidden="true" data-fallback="↥"></i><small>СКОК</small></button></div>
+            </section>
+        </main>
+        <nav class="mobile-nav" id="mobileNav" aria-label="Навигация"><button data-screen="home" class="active"><span><i class="fa-solid fa-house" aria-hidden="true" data-fallback="⌂"></i></span>Начало</button><button data-screen="avatar"><span><i class="fa-solid fa-user-astronaut" aria-hidden="true" data-fallback="♙"></i></span>Герой</button><button data-screen="garage"><span><i class="fa-solid fa-car-side" aria-hidden="true" data-fallback="▰"></i></span>Гараж</button><button data-screen="levels"><span><i class="fa-solid fa-map" aria-hidden="true" data-fallback="▦"></i></span>Нива</button></nav>
+    </div>
+</body>
+</html>
